@@ -1,0 +1,45 @@
+<html><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Live LaTeX Editor</title>
+
+  <!-- Not necessary for the core function, but having some colors will make your eyes happy -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<textarea id="messagebox" style="width: 100%; box-sizing: border-box; resize: none" rows="16">
+$${(x-1)!+1 \over x}$$
+
+$$\LaTeX$$
+</textarea>
+<br/>
+Preview:
+<p id="preview" style="border: 1px solid #444; padding: 5px">
+$${(x-1)!+1 \over x}$$
+
+$$\LaTeX$$
+</p>
+
+<script>
+MathJax = {
+  loader: {
+    load: ['input/tex-base', 'output/chtml', '[tex]/require']
+  },
+  tex: {
+    packages: ['base', 'require'],
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']]
+  }
+};
+const selectElement = document.querySelector('#messagebox');
+
+selectElement.addEventListener('change', (event) => {
+  const result = document.querySelector('#preview');
+  result.textContent = event.target.value;
+  MathJax.typeset()
+});
+
+</script><script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+</body></html>
